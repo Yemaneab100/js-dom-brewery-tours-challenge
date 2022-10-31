@@ -1,3 +1,4 @@
+
 const listOfBreweries = document.querySelector('#breweries-list');
 
 // Show by the name of a state
@@ -10,13 +11,10 @@ function showBrewByState(){
         // getting name of state from the form
         const stateData = new FormData(frmState);
         const state = Object.fromEntries(stateData);
-        //console.log(Object.keys(state));
         const uri = `https://api.openbrewerydb.org/breweries?by_state=${state['select-state']}`; 
         fetch(uri)
           .then((response) => {
-            // here I got my response from the server
-            // extract the JSON from the response
-            // and convert into a JS object, returning this object
+           
             return response.json();
           })
           .then((data) => {
@@ -26,8 +24,7 @@ function showBrewByState(){
     });
 }
 
-
-// Filter by type of brewery 
+// Filter by tyspe of brewery 
 function showBrewByType(){
     const slcType = document.querySelector('#filter-by-type');
     slcType.addEventListener('change', (event) =>{
@@ -36,13 +33,11 @@ function showBrewByType(){
         const uri = `https://api.openbrewerydb.org/breweries?by_type=${typeBrew}`; 
         fetch(uri)
           .then((response) => {
-            // here I got my response from the server
-            // extract the JSON from the response
-            // and convert into a JS object, returning this object
             return response.json();
           })
           .then((data) => {
-            showBrew(data)
+            showCities(data);
+            showBrew(data);
           });  
     })
 }
@@ -104,6 +99,47 @@ function showBrew(data){
     });   
 }
 
+
+
+// Extention 1 show breweries by name
+
+function showBrewByName(){
+    
+    const frmName = document.querySelector('.frmname');
+    frmName.addEventListener('submit', (event) => {
+        event.preventDefault();
+        listOfBreweries.innerHTML = " ";
+        // getting the name from form
+        const nameData = new FormData(frmName);
+        const name = Object.fromEntries(nameData);
+        
+        const uri = `https://api.openbrewerydb.org/breweries?by_name=${name.name}`; 
+        fetch(uri)
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            showBrew(data)
+          });
+    })
+}
+
+const frmCities = document.querySelector('.frmCities');
+function showCities(data){
+    data.forEach(brewery => {
+        const br = document.createElement('br');
+        const inpCity = document.createElement('input');
+        inpCity.setAttribute('type', 'checkbox');
+        const lblCities = document.createElement('label');
+        lblCities.innerText = brewery.city;
+        // frmCities.appendChild(inpCity);
+        // frmCities.appendChild(lblCities); 
+        frmCities.innerHTML += br.outerHTML + inpCity.outerHTML + lblCities.outerHTML;
+
+        console.log("name of city " + brewery.name);
+    });
+}
+
 showBrewByType();
 showBrewByState();
-
+showBrewByName();

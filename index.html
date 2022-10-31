@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/index.css" />
     <script src="index.js" defer></script>
-    
     <title>Brewery Tours</title>
   </head>
   <body>
@@ -34,9 +33,17 @@
               <option value="brewpub">Brewpub</option>
             </select>
           </form>
+        <form class="frmCities">
+          <label> <strong> Cities</strong> </label>
+          <a href="">clear all</a>
+        </form>
         </aside>
       </aside>
       <h1>List of Breweries</h1>
+      <form class="frmname">
+        <label for=""> Search Breweries: </label>
+        <input type="text" name="name">
+      </form>
       <article>
         <ul id="breweries-list" class="breweries-list">
           <!--

@@ -228,3 +228,22 @@ article {
   text-decoration: none;
   font-weight: bold;
 }
+
+.frmname{
+  background-color: rgb(235, 172, 14);
+}
+
+.frmname label{
+  margin-right: 40px;
+  margin-left: 60px;
+  font-size: 23px;
+}
+
+.frmCities{
+  margin-top: 20px;
+}
+
+.frmCities a{
+  float: right;
+  margin-right: 10px;
+}
